@@ -80,10 +80,6 @@ Unit tests cover:
 
 A live integration demonstration verifies Kafka, Schema Registry, Avro serialization/deserialization, aggregation, retry behavior and DLQ routing.
 
-## 10. Demonstration Procedure
-
-Start infrastructure with Docker Compose. Create the topics with `python -m src.setup`. Start the consumer and then the producer. Observe the running average after successful orders. Observe the retry output for `RetryItem` and the DLQ output for `DLQItem`. Finally run `pytest -q`.
-
-## 11. Conclusion
+## 10. Conclusion
 
 The completed system satisfies the assignment's required Kafka message flow, Avro serialization, real-time aggregation, retry handling and DLQ behavior. The Docker Compose environment makes the demonstration reproducible and the repository structure keeps configuration, schema, application code, tests and documentation separated.
