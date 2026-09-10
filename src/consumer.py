@@ -39,10 +39,6 @@ class PermanentProcessingFailure(Exception):
 
 
 class FailureSimulator:
-    """
-    Demo-only failure injector used to demonstrate
-    retry and DLQ behaviour.
-    """
 
     def __init__(self):
         self.attempts = defaultdict(int)
@@ -114,10 +110,6 @@ def run():
             if msg.error():
                 raise KafkaException(msg.error())
 
-            # Deserialize the Avro message.
-            #
-            # SerializationContext is required by the current
-            # confluent-kafka Avro serializer/deserializer API.
             order = deserializer(
                 msg.value(),
                 SerializationContext(
@@ -190,8 +182,6 @@ def run():
                             f"{order['orderId']}."
                         )
 
-            # If processing failed permanently, or all retry attempts
-            # were exhausted, send the message to the DLQ.
             if not processed and last_error is not None:
                 attempts = failures.attempts[
                     order["orderId"]
